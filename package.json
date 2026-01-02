@@ -1,0 +1,13 @@
+{
+    "name": "kntista",
+    "version": "0.0.1",
+    "private": true,
+    "workspaces": ["front", "back", "tg"],
+    "scripts": {
+        "prepare": "husky"
+    },
+    "devDependencies": {
+        "husky": "^9.1.7",
+        "lint-staged": "^16.2.7"
+    }
+}

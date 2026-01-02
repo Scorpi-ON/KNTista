@@ -1,0 +1,68 @@
+### IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+### VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+### Env files
+.env*
+!.env.template
+!.env.example
+
+### Temp directory
+.temp/
+.tmp/
+
+### JS dependencies
+node_modules/
+
+### Tests
+/coverage
+/.nyc_output
+
+### React Router
+.react-router/
+
+### Production
+dist/
+build/
+bin/
+
+### Misc
+.DS_Store
+*.pem
+
+### Typescript
+*.tsbuildinfo
+next-env.d.ts
+
+### Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+### cp files
+*.cp
+
+### Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+### Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
