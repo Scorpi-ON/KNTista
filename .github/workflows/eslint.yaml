@@ -46,10 +46,10 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Build front
+      - name: Lint front
         working-directory: front
-        run: bun run build
+        run: bun run lint
 
-      - name: Build back
+      - name: Lint back
         working-directory: back
-        run: bun run build
+        run: bun run lint

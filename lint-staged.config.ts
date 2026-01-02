@@ -17,4 +17,5 @@ export default {
         "bun --cwd tg run prettier --write --ignore-path ../.gitignore",
         "bun --cwd tg run eslint --fix",
     ],
+    "**/package.json": () => ["bun install", "git add bun.lock"],
 };
