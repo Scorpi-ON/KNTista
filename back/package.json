@@ -10,13 +10,17 @@
         "start": "bun run --bun nest start",
         "start:dev": "bun run --bun nest start --watch",
         "start:debug": "bun run --bun nest start --debug --watch",
-        "start:prod": "bun run --bun dist/src/main"
+        "start:prod": "bun run --bun ./dist/main.js"
     },
     "dependencies": {
+        "@fastify/static": "^9.0.0",
         "@nestjs/common": "^11.0.1",
         "@nestjs/core": "^11.0.1",
         "@nestjs/platform-fastify": "^11.1.11",
         "@nestjs/swagger": "^11.2.3",
+        "@prisma/adapter-pg": "^7.2.0",
+        "@prisma/client": "^7.2.0",
+        "prisma": "^7.2.0",
         "reflect-metadata": "^0.2.2",
         "rxjs": "^7.8.1"
     },
