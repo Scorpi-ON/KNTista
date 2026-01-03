@@ -17,7 +17,7 @@ const eslintConfig = defineConfig([
             parser: eslintParserTypeScript,
             parserOptions: {
                 tsconfigRootDir: import.meta.dirname,
-                project: true
+                project: true,
             },
         },
         extends: [tseslint.configs.strictTypeChecked, tseslint.configs.stylisticTypeChecked],

@@ -17,13 +17,13 @@ const eslintConfig = defineConfig([
             parser: eslintParserTypeScript,
             parserOptions: {
                 project: true,
-                tsconfigRootDir: import.meta.dirname
+                tsconfigRootDir: import.meta.dirname,
             },
         },
         extends: [tseslint.configs.strictTypeChecked, tseslint.configs.stylisticTypeChecked],
         rules: {
             "@typescript-eslint/restrict-template-expressions": "off",
-            "@typescript-eslint/no-extraneous-class": "off"
+            "@typescript-eslint/no-extraneous-class": "off",
         },
     },
     prettier,
