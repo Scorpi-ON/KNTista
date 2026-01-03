@@ -1,10 +1,12 @@
 import { Module } from "@nestjs/common";
-import { AppController } from "./app.controller";
-import { AppService } from "./app.service";
+import { ConfigModule, ConfigService } from "@nestjs/config";
+import { JoiPipeModule } from "nestjs-joi";
+
+import { ActivityModule } from "./activity/activity.module";
+import webConfig from "./config/web.config";
 
 @Module({
-    imports: [],
-    controllers: [AppController],
-    providers: [AppService],
+    imports: [ConfigModule.forRoot({ load: [webConfig], isGlobal: true }), JoiPipeModule, ActivityModule],
+    providers: [ConfigService],
 })
 export class AppModule {}

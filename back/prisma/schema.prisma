@@ -1,0 +1,85 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRoles {
+  USER
+  ADMIN
+}
+
+model User {
+  id         String    @id @default(uuid()) @db.Uuid
+  tgId       Int?      @unique
+  name       String
+  email      String    @unique
+  password   String
+  profilePic Bytes?
+  role       UserRoles
+  isDeleted  Boolean   @default(false)
+
+  @@map("Users")
+}
+
+model Module {
+  id        String  @id @default(uuid()) @db.Uuid
+  number    Int     @db.SmallInt
+  name      String  @unique
+  isDeleted Boolean @default(false)
+  events    Event[]
+
+  @@map("Modules")
+}
+
+model ResponsiblePerson {
+  id        String  @id @default(uuid()) @db.Uuid
+  name      String  @unique
+  isDeleted Boolean @default(false)
+  events    Event[]
+
+  @@map("ResponsiblePersons")
+}
+
+model EventType {
+  id        String  @id @default(uuid()) @db.Uuid
+  name      String  @unique
+  isDeleted Boolean @default(false)
+  events    Event[]
+
+  @@map("EventTypes")
+}
+
+model Location {
+  id        String  @id @default(uuid()) @db.Uuid
+  name      String
+  isOffline Boolean
+  address   String?
+  isDeleted Boolean @default(false)
+  events    Event[]
+
+  @@unique([name, isOffline])
+  @@map("Locations")
+}
+
+model Event {
+  id                  String            @id @default(uuid()) @db.Uuid
+  moduleId            String            @db.Uuid
+  module              Module            @relation(fields: [moduleId], references: [id])
+  startDates          DateTime[]        @db.Date
+  endDate             DateTime?         @db.Date
+  locationId          String            @db.Uuid
+  location            Location          @relation(fields: [locationId], references: [id])
+  name                String
+  eventTypeId         String            @db.Uuid
+  eventType           EventType         @relation(fields: [eventTypeId], references: [id])
+  responsiblePersonId String            @db.Uuid
+  responsiblePerson   ResponsiblePerson @relation(fields: [responsiblePersonId], references: [id])
+  participantsCount   Int               @db.SmallInt
+  links               String[]          @db.Text
+
+  @@map("Events")
+}

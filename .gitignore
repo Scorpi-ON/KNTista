@@ -30,13 +30,12 @@ node_modules/
 /coverage
 /.nyc_output
 
-### React Router
+### Generated output
 .react-router/
-
-### Production
 dist/
 build/
 bin/
+generated/
 
 ### Misc
 .DS_Store
