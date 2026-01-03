@@ -15,19 +15,18 @@ RUN --mount=type=cache,id=bun,target=~/.bun/install/cache \
     bun install --frozen-lockfile --ignore-scripts
 
 FROM deps AS build
-COPY front ./front
-COPY .env ./.env
-WORKDIR /app/front
+COPY back ./back
+WORKDIR /app/back
 ENV NODE_ENV=production
 RUN bun run build
 
 FROM base AS release
 ENV NODE_ENV=production
-COPY --from=build /app/front/build ./front/build
-COPY --from=build /app/front/package.json ./front/package.json
+COPY --from=build /app/back/dist ./back/dist
+COPY --from=build /app/back/package.json ./back/package.json
 COPY --from=prod-deps /app/node_modules ./node_modules
-COPY --from=prod-deps /app/front/node_modules ./front/node_modules
-WORKDIR /app/front
+COPY --from=prod-deps /app/back/node_modules ./back/node_modules
+WORKDIR /app/back
 USER bun
-EXPOSE 3000
-ENTRYPOINT ["bun", "run", "start"]
+EXPOSE 5000
+ENTRYPOINT ["bun", "run", "start:prod"]
