@@ -21,9 +21,6 @@ interface SoftDeleteResult {
     id: string;
     isDeleted: boolean;
 }
-interface BatchPayload {
-    count: number;
-}
 
 export abstract class BaseReferencesService<
     M extends ReferenceModelDelegate = ReferenceModelDelegate,

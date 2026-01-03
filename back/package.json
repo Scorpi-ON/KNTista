@@ -12,7 +12,9 @@
         "start:debug": "bun run --bun nest start --debug --watch",
         "start:prod": "bun run --bun ./dist/main.js",
         "db:gen": "bun run --bun prisma generate",
-        "db:seed": "bun run --bun ./src/seed/seed.ts"
+        "db:push": "bun run --bun prisma db push",
+        "db:seed": "bun run --bun ./src/seed/seed.ts",
+        "postinstall": "bun run db:gen",
     },
     "dependencies": {
         "@fastify/static": "^9.0.0",
