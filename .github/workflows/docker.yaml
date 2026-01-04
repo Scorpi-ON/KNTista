@@ -1,0 +1,42 @@
+name: Docker Compose
+permissions:
+  contents: read
+  pull-requests: read
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "**.js"
+      - "**.mjs"
+      - "**.ts"
+      - "**.jsx"
+      - "**.tsx"
+      - "**.html"
+      - "**.json"
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - "**.js"
+      - "**.mjs"
+      - "**.ts"
+      - "**.jsx"
+      - "**.tsx"
+      - "**.html"
+      - "**.json"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Create .env
+        run: mv .env.example .env
+
+      - name: Run docker compose
+        uses: hoverkraft-tech/compose-action@248470ecc5ed40d8ed3d4480d8260d77179ef579 # v2.4.2
+        with:
+          compose-file: "./compose.yaml"
