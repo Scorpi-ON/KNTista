@@ -4,6 +4,7 @@
     "private": true,
     "scripts": {
         "lint": "bun run eslint --fix .",
+        "typecheck": "bun run --bun tsc -p tsconfig.json --noEmit",
         "format": "bun run --bun prettier . --write --ignore-path ../.gitignore",
         "dev": "bun run --bun --env-file ../.env react-router dev",
         "build": "bun run --bun nest build",

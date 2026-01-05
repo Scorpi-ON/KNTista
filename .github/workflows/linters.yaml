@@ -46,9 +46,17 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
+      - name: Typecheck front
+        working-directory: front
+        run: bun run typecheck
+
       - name: Lint front
         working-directory: front
         run: bun run lint
+
+      - name: Typecheck back
+        working-directory: back
+        run: bun run typecheck
 
       - name: Lint back
         working-directory: back
