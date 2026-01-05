@@ -1,3 +1,4 @@
+import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
 import { FastifyAdapter, NestFastifyApplication } from "@nestjs/platform-fastify";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
@@ -5,7 +6,9 @@ import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { AppModule } from "./app.module";
 
 async function bootstrap() {
-    const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter());
+    const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter(), {
+        bodyParser: false,
+    });
 
     const config = new DocumentBuilder()
         .setTitle("KNTista-api")
@@ -15,10 +18,9 @@ async function bootstrap() {
     const documentFactory = () => SwaggerModule.createDocument(app, config);
     SwaggerModule.setup("docs", app, documentFactory);
 
-    if (!process.env.PORT) {
-        throw new Error("PORT is not defined");
-    }
-    await app.listen(process.env.PORT, "0.0.0.0");
+    const configService = app.get(ConfigService);
+    const port = configService.getOrThrow<number>("app.port");
+    await app.listen(port, "0.0.0.0");
 }
 
 void bootstrap();

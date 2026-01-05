@@ -13,14 +13,19 @@ enum UserRoles {
 }
 
 model User {
-  id         String    @id @default(uuid()) @db.Uuid
-  tgId       Int?      @unique
-  name       String
-  email      String    @unique
-  password   String
-  profilePic Bytes?
-  role       UserRoles
-  isDeleted  Boolean   @default(false)
+  id            String    @id @default(uuid()) @db.Uuid
+  tgId          Int?      @unique
+  name          String
+  email         String    @unique
+  password      String
+  role          UserRoles
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  isDeleted     Boolean   @default(false)
+  sessions      Session[]
+  accounts      Account[]
 
   @@map("Users")
 }
@@ -82,4 +87,52 @@ model Event {
   links               String[]          @db.Text
 
   @@map("Events")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String   @db.Uuid
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String    @db.Uuid
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
 }

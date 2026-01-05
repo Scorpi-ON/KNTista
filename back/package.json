@@ -12,9 +12,9 @@
         "start:dev": "bun run --bun nest start --watch",
         "start:debug": "bun run --bun nest start --debug --watch",
         "start:prod": "bun run --bun ./dist/main.js",
-        "db:gen": "bun run --bun prisma generate",
-        "db:push": "bun run --bun prisma db push",
-        "db:seed": "bun run --bun ./src/seed/seed.ts",
+        "db:gen": "bun run --bun --env-file ../.env prisma generate",
+        "db:push": "bun run --bun --env-file ../.env prisma db push",
+        "db:seed": "bun run --bun --env-file ../.env ./src/seed/seed.ts",
         "postinstall": "bun run db:gen"
     },
     "dependencies": {
@@ -26,6 +26,8 @@
         "@nestjs/swagger": "^11.2.3",
         "@prisma/adapter-pg": "^7.2.0",
         "@prisma/client": "^7.2.0",
+        "@thallesp/nestjs-better-auth": "^2.2.0",
+        "better-auth": "^1.4.10",
         "docxtemplater": "^3.67.6",
         "joi": "^18.0.2",
         "nestjs-joi": "^1.12.0",
