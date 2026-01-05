@@ -18,6 +18,7 @@ on:
       - "**/Dockerfile*"
       - "compose.yaml"
       - ".env.example"
+      - ".github/workflows/docker.yaml"
   pull_request:
     branches: [ "main" ]
     paths:
@@ -31,6 +32,7 @@ on:
       - "**/Dockerfile*"
       - "compose.yaml"
       - ".env.example"
+      - ".github/workflows/docker.yaml"
 
 jobs:
   build:

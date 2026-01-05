@@ -14,6 +14,7 @@ on:
       - "**.tsx"
       - "**.html"
       - "**.json"
+      - ".github/workflows/build.yaml"
   pull_request:
     branches: [ "main" ]
     paths:
@@ -24,6 +25,7 @@ on:
       - "**.tsx"
       - "**.html"
       - "**.json"
+      - ".github/workflows/build.yaml"
 
 jobs:
   build:
