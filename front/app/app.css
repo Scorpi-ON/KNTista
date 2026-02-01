@@ -1,16 +1,76 @@
 @import "tailwindcss";
+@import "@heroui/styles"; 
 
-@theme {
-    --font-sans:
-        "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-        "Noto Color Emoji";
+:root,
+.light,
+.default,
+[data-theme="light"],
+[data-theme="default"] {
+  /* Theme Colors (Light Mode) */
+  --accent: oklch(62.04% 0.1950 159.24);
+  --accent-foreground: oklch(99.11% 0 0);
+  --background: oklch(97.02% 0.0048 159.24);
+  --border: oklch(90.00% 0.0048 159.24);
+  --danger: oklch(65.32% 0.2350 14.39);
+  --danger-foreground: oklch(99.11% 0 0);
+  --default: oklch(94.00% 0.0048 159.24);
+  --default-foreground: oklch(21.03% 0.0059 159.24);
+  --field-background: oklch(100.00% 0.0024 159.24);
+  --field-foreground: oklch(21.03% 0.0059 159.24);
+  --field-placeholder: oklch(55.17% 0.0096 159.24);
+  --focus: oklch(62.04% 0.1950 159.24);
+  --foreground: oklch(21.03% 0.0059 159.24);
+  --muted: oklch(55.17% 0.0096 159.24);
+  --overlay: oklch(100.00% 0.0014 159.24);
+  --overlay-foreground: oklch(21.03% 0.0059 159.24);
+  --scrollbar: oklch(87.10% 0.0048 159.24);
+  --segment: oklch(100.00% 0.0048 159.24);
+  --segment-foreground: oklch(21.03% 0.0059 159.24);
+  --separator: oklch(92.00% 0.0048 159.24);
+  --success: oklch(73.29% 0.1954 139.46);
+  --success-foreground: oklch(21.03% 0.0059 139.46);
+  --surface: oklch(100.00% 0.0024 159.24);
+  --surface-foreground: oklch(21.03% 0.0059 159.24);
+  --warning: oklch(78.19% 0.1600 60.98);
+  --warning-foreground: oklch(21.03% 0.0059 60.98);
+
+  /* Border Radius */
+  --radius: 0.5rem;
+  --field-radius: 0.75rem;
+
+  /* Font Family */
+  /* Make sure to load Inter font in your app */
+  --font-sans: var(--font-inter);
 }
 
-html,
-body {
-    @apply bg-white dark:bg-gray-950;
-
-    @media (prefers-color-scheme: dark) {
-        color-scheme: dark;
-    }
+.dark,
+[data-theme="dark"] {
+  color-scheme: dark;
+  /* Theme Colors (Dark Mode) */
+  --accent: oklch(62.04% 0.1950 159.24);
+  --accent-foreground: oklch(99.11% 0 0);
+  --background: oklch(12.00% 0.0048 159.24);
+  --border: oklch(28.00% 0.0048 159.24);
+  --danger: oklch(59.40% 0.1986 13.28);
+  --danger-foreground: oklch(99.11% 0 0);
+  --default: oklch(27.40% 0.0048 159.24);
+  --default-foreground: oklch(99.11% 0 0);
+  --field-background: oklch(21.03% 0.0096 159.24);
+  --field-foreground: oklch(99.11% 0.0000 0.00);
+  --field-placeholder: oklch(70.50% 0.0096 159.24);
+  --focus: oklch(62.04% 0.1950 159.24);
+  --foreground: oklch(99.11% 0.0000 0.00);
+  --muted: oklch(70.50% 0.0096 159.24);
+  --overlay: oklch(21.03% 0.0096 159.24);
+  --overlay-foreground: oklch(99.11% 0.0000 0.00);
+  --scrollbar: oklch(70.50% 0.0048 159.24);
+  --segment: oklch(39.64% 0.0048 159.24);
+  --segment-foreground: oklch(99.11% 0.0000 0.00);
+  --separator: oklch(25.00% 0.0048 159.24);
+  --success: oklch(73.29% 0.1954 139.46);
+  --success-foreground: oklch(21.03% 0.0059 139.46);
+  --surface: oklch(21.03% 0.0096 159.24);
+  --surface-foreground: oklch(99.11% 0.0000 0.00);
+  --warning: oklch(82.03% 0.1401 64.99);
+  --warning-foreground: oklch(21.03% 0.0059 64.99);
 }

@@ -11,4 +11,7 @@ export default defineConfig({
             "react-dom/server": "react-dom/server.node",
         },
     },
+    optimizeDeps: {
+        include: ["@heroui/react", "joi"],
+    },
 });

@@ -1,6 +1,8 @@
 ARG BUN_VERSION=1.3
 FROM oven/bun:${BUN_VERSION}-slim AS base
+ENV NODE_ENV=production
 WORKDIR /app
+EXPOSE 3000
 
 FROM base AS prod-deps
 COPY package.json bun.lock ./
@@ -17,17 +19,12 @@ RUN --mount=type=cache,id=bun,target=~/.bun/install/cache \
 FROM deps AS build
 COPY front ./front
 COPY .env ./.env
-WORKDIR /app/front
-ENV NODE_ENV=production
-RUN bun run build
+RUN bun run --cwd front build 
 
 FROM base AS release
-ENV NODE_ENV=production
 COPY --from=build /app/front/build ./front/build
 COPY --from=build /app/front/package.json ./front/package.json
 COPY --from=prod-deps /app/node_modules ./node_modules
 COPY --from=prod-deps /app/front/node_modules ./front/node_modules
-WORKDIR /app/front
 USER bun
-EXPOSE 3000
-ENTRYPOINT ["bun", "run", "start"]
+ENTRYPOINT ["bun", "run", "--cwd", "front", "start"]

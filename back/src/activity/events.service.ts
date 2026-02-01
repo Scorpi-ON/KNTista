@@ -189,7 +189,9 @@ export class EventsService {
         },
     ) {
         const moduleId = module ? await this.resolveModuleId(module) : undefined;
-        const responsiblePersonId = responsiblePerson ? await this.resolveResponsiblePersonId(responsiblePerson) : undefined;
+        const responsiblePersonId = responsiblePerson
+            ? await this.resolveResponsiblePersonId(responsiblePerson)
+            : undefined;
         const locationId = location ? await this.resolveLocationId(location) : undefined;
         const eventTypeId = eventType ? await this.resolveEventTypeId(eventType) : undefined;
 

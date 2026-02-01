@@ -40,6 +40,12 @@ const eslintConfig = defineConfig([
         },
         rules: {
             ...tailwind.configs.correctness.rules,
+            "better-tailwindcss/no-unknown-classes": [
+                "error",
+                {
+                    ignore: ["app-shell", "page-wrap"],
+                },
+            ],
         },
         settings: {
             "better-tailwindcss": {

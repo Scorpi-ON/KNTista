@@ -8,7 +8,7 @@ const schema = Joi.object({
     betterAuthBaseUrl: Joi.string().uri().optional(),
     betterAuthTrustedOrigins: Joi.array().items(Joi.string().uri()).optional(),
     databaseUrl: Joi.string().required(),
-}).or("better_auth_url", "better_auth_base_url");
+}).or("betterAuthUrl", "betterAuthBaseUrl");
 
 const config = registerAs("app", () => {
     const trustedOrigins = process.env.BETTER_AUTH_TRUSTED_ORIGINS?.split(",")

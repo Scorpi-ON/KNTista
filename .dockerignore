@@ -8,6 +8,7 @@
 **/.vs
 **/.vscode
 **/.idea
+**/.zed
 **/.next
 **/.cache
 **/*.*proj.user
