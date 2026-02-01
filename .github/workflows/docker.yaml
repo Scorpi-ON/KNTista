@@ -6,7 +6,7 @@ permissions:
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
     paths:
       - "**.js"
       - "**.mjs"
@@ -20,7 +20,7 @@ on:
       - ".env.example"
       - ".github/workflows/docker.yaml"
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
     paths:
       - "**.js"
       - "**.mjs"
@@ -44,18 +44,18 @@ jobs:
           - name: back
             context: .
             dockerfile: ./back/Dockerfile
-            image: ghcr.io/${{ OWNER_LC }}/kntista-back
+            image: kntista-back
           - name: front
             context: .
             dockerfile: ./front/Dockerfile
-            image: ghcr.io/${{ OWNER_LC }}/kntista-front
+            image: kntista-front
 
-    steps:      
+    steps:
       - name: set lower case owner name
         run: |
           echo "OWNER_LC=${OWNER,,}" >>${GITHUB_ENV}
         env:
-          OWNER: '${{ github.repository_owner }}'
+          OWNER: "${{ github.repository_owner }}"
 
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -84,8 +84,8 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
           tags: |
-            ${{ matrix.image }}:latest
-            ${{ matrix.image }}:${{ github.sha }}
+            ghcr.io/${{ env.OWNER_LC }}/${{ matrix.image }}:latest
+            ghcr.io/${{ env.OWNER_LC }}/${{ matrix.image }}:${{ github.sha }}
 
   compose:
     runs-on: ubuntu-latest
