@@ -9,7 +9,7 @@ interface HotModule {
         accept: () => void;
         dispose: (callback: () => void) => void;
     };
-};
+}
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule, {

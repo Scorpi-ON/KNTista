@@ -15,7 +15,7 @@
         "db:gen": "bun run -b --env-file ../.env prisma generate",
         "db:push": "bun run -b --env-file ../.env prisma db push",
         "db:seed": "bun run -b --env-file ../.env ./src/seed/seed.ts",
-        "postinstall": "bun run db:gen"
+        "postinstall": "bun run -b db:gen"
     },
     "dependencies": {
         "@nestjs/common": "^11.1.12",

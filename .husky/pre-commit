@@ -1,1 +1,1 @@
-bun run --bun lint-staged
+bun run -b lint-staged
