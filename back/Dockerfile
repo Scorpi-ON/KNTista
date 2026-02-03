@@ -1,7 +1,6 @@
 ARG BUN_VERSION=1.3
 FROM oven/bun:${BUN_VERSION}-slim AS base
-ENV NODE_ENV=production \
-    PRISMA_ENGINES_CACHE=/tmp/prisma-engines
+ENV PRISMA_ENGINES_CACHE=/tmp/prisma-engines
 EXPOSE 5000
 WORKDIR /app
 
@@ -18,9 +17,17 @@ RUN --mount=type=cache,id=bun,target=~/.bun/install/cache \
     bun install --frozen-lockfile --ignore-scripts
 
 FROM deps AS build
-COPY back ./back
+COPY --chown=bun:bun back ./back
 COPY .env ./
 RUN bun run --cwd back db:gen && bun run --cwd back build
+
+FROM build AS dev
+WORKDIR /app/back
+# USER bun
+RUN mkdir -p /tmp/prisma-engines \
+    && chmod +x ./docker-entrypoint.sh
+ENTRYPOINT ["./docker-entrypoint.sh"]
+CMD ["bun", "run", "start:dev"]
 
 FROM base AS release
 COPY --from=build --chown=bun:bun \

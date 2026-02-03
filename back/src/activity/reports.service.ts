@@ -7,7 +7,16 @@ import PizZip from "pizzip";
 import { EventsService } from "./events.service";
 import { ModulesService } from "./modules.service";
 
-const TEMPLATE_PATH = path.resolve(__dirname, "assets/report-template.docx");
+const TEMPLATE_FILENAME = "report-template.docx";
+const TEMPLATE_CANDIDATES = [
+    path.resolve(process.cwd(), "dist", "activity", "assets", TEMPLATE_FILENAME),
+    path.resolve(process.cwd(), "src", "activity", "assets", TEMPLATE_FILENAME),
+    path.resolve(__dirname, "assets", TEMPLATE_FILENAME),
+];
+const TEMPLATE_PATH = TEMPLATE_CANDIDATES.find((candidate) => fs.existsSync(candidate));
+if (!TEMPLATE_PATH) {
+    throw new Error(`Report template not found. Tried: ${TEMPLATE_CANDIDATES.join(", ")}`);
+}
 const TEMPLATE_CONTENT = fs.readFileSync(TEMPLATE_PATH, "binary");
 const MONTHS: string[] = [];
 for (let month = 0, date = new Date(); month < 12; ++month) {

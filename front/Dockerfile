@@ -1,6 +1,5 @@
 ARG BUN_VERSION=1.3
 FROM oven/bun:${BUN_VERSION}-slim AS base
-ENV NODE_ENV=production
 WORKDIR /app
 EXPOSE 3000
 
@@ -19,7 +18,12 @@ RUN --mount=type=cache,id=bun,target=~/.bun/install/cache \
 FROM deps AS build
 COPY front ./front
 COPY .env ./.env
-RUN bun run --cwd front build 
+RUN bun run --cwd front build
+
+FROM build AS dev
+ENV CHOKIDAR_USEPOLLING=true
+# USER bun
+ENTRYPOINT ["bun", "run", "--cwd", "front", "dev", "--host", "0.0.0.0", "--port", "3000"]
 
 FROM base AS release
 COPY --from=build /app/front/build ./front/build

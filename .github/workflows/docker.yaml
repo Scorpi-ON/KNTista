@@ -99,6 +99,7 @@ jobs:
         run: mv .env.example .env
 
       - name: Run docker compose
-        uses: hoverkraft-tech/compose-action@248470ecc5ed40d8ed3d4480d8260d77179ef579 # v2.4.2
+        uses: hoverkraft-tech/compose-action@4894d2492015c1774ee5a13a95b1072093087ec3 # v2.5.0
         with:
           compose-file: "./compose.yaml"
+          compose-flags: "--profile prod"

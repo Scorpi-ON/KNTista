@@ -4,6 +4,13 @@ import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 
 import { AppModule } from "./app.module";
 
+interface HotModule {
+    hot?: {
+        accept: () => void;
+        dispose: (callback: () => void) => void;
+    };
+};
+
 async function bootstrap() {
     const app = await NestFactory.create(AppModule, {
         bodyParser: false,
@@ -20,6 +27,14 @@ async function bootstrap() {
     const configService = app.get(ConfigService);
     const port = configService.getOrThrow<number>("app.port");
     await app.listen(port, "0.0.0.0");
+
+    if (typeof module !== "undefined") {
+        const hotModule = module as HotModule;
+        if (hotModule.hot) {
+            hotModule.hot.accept();
+            hotModule.hot.dispose(() => void app.close());
+        }
+    }
 }
 
 void bootstrap();

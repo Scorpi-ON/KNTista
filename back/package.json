@@ -8,7 +8,8 @@
         "format": "bun run -b prettier . --write --ignore-path ../.gitignore",
         "build": "bun run -b nest build",
         "start": "bun run -b nest start",
-        "start:dev": "bun run -b nest start --watch",
+        "start:dev": "bun run -b nest build --webpack --webpackPath webpack-hmr.config.js --watch",
+        "start:dev:swc": "bun run -b nest start --watch",
         "start:debug": "bun run -b nest start --debug --watch",
         "start:prod": "bun run -b ./dist/main.js",
         "db:gen": "bun run -b --env-file ../.env prisma generate",
@@ -48,11 +49,14 @@
         "globals": "^17.3.0",
         "prettier": "^3.8.1",
         "prettier-plugin-organize-imports": "^4.3.0",
+        "run-script-webpack-plugin": "^0.2.3",
         "source-map-support": "^0.5.21",
         "swc-loader": "^0.2.7",
         "ts-loader": "^9.5.4",
         "tsconfig-paths": "^4.2.0",
         "typescript": "^5.9.3",
-        "typescript-eslint": "^8.54.0"
+        "typescript-eslint": "^8.54.0",
+        "webpack": "^5.105.0",
+        "webpack-node-externals": "^3.0.0"
     }
 }
